@@ -1,10 +1,43 @@
 version: "3.4"
 
 services:
-  db:
+  database:
     image: postgres
     restart: always
     ports:
       - $DB_PORT:$DB_PORT
     env_file:
       - .env
+    networks:
+      - api_net
+
+  web:
+    image: nginx
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - app
+    volumes:
+      - "./nginx.conf:/etc/nginx/nginx.conf"
+    networks:
+      - api_net
+
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    command: bash -c "rails server -b 0.0.0.0"
+    ports:
+      - 3000:3000
+    depends_on:
+      - database
+    volumes:
+      - .:/app
+    networks:
+      - api_net
+
+networks:
+  api_net:
+    driver: bridge

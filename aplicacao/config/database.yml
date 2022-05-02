@@ -17,10 +17,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: 127.0.0.1
-  username: $POSTRES_USER
-  password: $POSTGRES_PASSWORD
-  port: $DB_PORT
+  host: database
+  username: postgres
+  password: postgres
+  port: 5432
   reconnect: true
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
