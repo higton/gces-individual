@@ -33,4 +33,4 @@ jobs:
       - uses: actions/checkout@v3
       - name: Runing Lint check
         working-directory: ./aplicacao
-        run: docker-compose run app bash -c "gem install rubocop; rubocop"
+        run: docker-compose run app bash -c "gem install rubocop; rubocop --only Style/TrailingCommaInHashLiteral"
