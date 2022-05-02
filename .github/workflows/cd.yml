@@ -24,7 +24,7 @@ jobs:
       - name: Pushing to docker-hub
         uses: docker/build-push-action@v2
         with:
-          context: ./aplicacao/app
-          file: ./aplicacao/app/Dockerfile
+          context: {{defaultContext}}:aplicacao
+          file: ./app/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}
